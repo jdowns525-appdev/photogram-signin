@@ -1,8 +1,35 @@
 class UsersController < ApplicationController
 
+  def authenticate
+    un = params.fetch("input_username")
+    pw = params.fetch("input_password")
+    
+    user = User.where({ :username => un }).at(0)
+
+    if user == nil
+      redirect_to("/user_sign_in", { :alert => "No one by that name 'round these parts"})
+    else
+
+      user.authenticate
+      redirect_to("/")
+    end
+  end
+
+  def toast_cookies
+
+    reset_session
+
+    redirect_to("/", { :notice => "See ya later!"})
+  end
+  
   def new_registration_form
 
     render({ :template => "users/signup_form.html.erb"})
+  end
+
+  def new_session_form
+
+    render({ :template => "users/signin_form.html.erb"})
   end
 
   def index
