@@ -39,4 +39,20 @@ class PhotosController < ApplicationController
 
     redirect_to("/photos/#{photo.id}")
   end
+
+  def likes
+    id = params.fetch ("photo_id")
+    like = Like.where({ :photo_id => id}).at(0)
+    like.save
+
+  redirect_to("/photos/#{like.photo_id}")
+  end
+
+  def delete_like
+    id = params.fetch("photo_id")
+    like = Like.where({ :photo_id => id }).at(0)
+    like.destroy
+
+    redirect_to("/photos/#{like.photo_id}")
+  end
 end

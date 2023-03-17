@@ -25,11 +25,14 @@ Rails.application.routes.draw do
 
   # DELETE
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
+  get("/delete_like/:photo_id", {:controller => "photos", :action => "delete_like"})
 
   # Photo routes
 
   # CREATE
   get("/insert_photo_record", { :controller => "photos", :action => "create" })
+
+  post("/insert_like", { :controller => "photos", :action => "likes" })
 
   # READ
   get("/photos", { :controller => "photos", :action => "index"})
