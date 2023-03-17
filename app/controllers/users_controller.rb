@@ -13,10 +13,12 @@ class UsersController < ApplicationController
       if user.authenticate(pw)
         session.store(:user_id, user.id)
 
-        redirect_to("/", { :notice => "welcome.b!"})
+        redirect_to("/", { :notice => "welcome back, " + user.username + "!" })
+      else
+        redirect_to("/user_sign_in", :alert => "Nice try, Sucker!")
       
+      end
     end
-  end
   end
 
   def toast_cookies
